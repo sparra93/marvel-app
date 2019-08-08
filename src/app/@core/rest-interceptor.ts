@@ -18,7 +18,6 @@ export class RestInterceptor implements HttpInterceptor {
             'Access-Control-Allow-Origin' : '*'
         });
         const authRequest = req.clone({headers});
-        console.log(authRequest);
         return next.handle(authRequest);
     }
 

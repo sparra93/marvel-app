@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  api_url: 'https://gateway.marvel.com/v1/public'
+  api_url: 'http://localhost:9000/api'
 };

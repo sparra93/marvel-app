@@ -2,20 +2,20 @@
     <div class="col-md-3 pt-5" *ngFor="let character of characters">
         <app-card>
             <div pre-body-img>
-                <img class="card-img-top rounded-0"
-                     src="{{character.thumbnail.path}}.{{character.thumbnail.extension}}"
-                     alt="Image {{ character.name }}"
-                     width="auto" height="260">
+                <img class="card-img-top rounded-0" src="{{character.thumbnail.path}}.{{character.thumbnail.extension}}"
+                    alt="Image {{ character.name }}" width="auto" height="260">
             </div>
-            <div body>
-                <i  *ngIf="character.comics.available > 0"
-                    class="fas fa-book-reader float-right p-1 my-1"
-                    title="{{character.comics.available}} commics available">
-                </i>
-                <i  *ngIf="character.series.available > 0"
-                    class="fas fa-tv float-right p-1 my-1"
-                    title="{{character.series.available}} series available">
-                </i>
+            <div footer>
+                <a *ngIf="character.comics.available > 0" class="float-right p-1 my-1">
+                    <i  class="fas fa-book-reader"
+                        title="{{character.comics.available}} commics available">
+                    </i>
+                </a>
+                <a *ngIf="character.series.available > 0" class="float-right p-1 my-1">
+                    <i  class="fas fa-tv"
+                        title="{{character.series.available}} series available">
+                    </i>
+                </a>
             </div>
         </app-card>
     </div>

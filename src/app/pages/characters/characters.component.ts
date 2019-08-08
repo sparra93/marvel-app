@@ -8,6 +8,8 @@ import { CharacterService } from '../../shared/services/character.service';
 })
 export class CharactersComponent implements OnInit {
 
+  characters: any[] = [];
+
   constructor(private characterService: CharacterService) { }
 
   ngOnInit() {
@@ -16,6 +18,7 @@ export class CharactersComponent implements OnInit {
 
   getCharacters(): void {
     this.characterService.getAll().subscribe(data => {
+      this.characters = data;
       console.log(data);
     });
   }

@@ -37,8 +37,9 @@ export class CharactersComponent implements OnInit, OnDestroy {
       .subscribe(response => {
         this.characters = response.data;
         this.resultsInfo = response.results;
+        this.page = response.results.offset / response.results.limit + 1;
         this.loading = false;
-      });
+      }, erro => { this.loading = false;});
   }
 
   onPageChange($event: any): void {

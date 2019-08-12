@@ -7,6 +7,8 @@ import { RestInterceptor } from './rest-interceptor';
 import { CardComponent } from './components/card/card.component';
 import { EmptyDataPipe } from './pipes/empty-data.pipe';
 import { HeaderComponent } from './components/header/header.component';
+import { PaginatorComponent } from './components/paginator/paginator.component';
+import { LoadingComponent } from './components/loading/loading.component';
 
 const modules = [
   HttpClientModule,
@@ -20,6 +22,8 @@ const providers = [
 const declarations = [
   CardComponent,
   HeaderComponent,
+  PaginatorComponent,
+  LoadingComponent,
   EmptyDataPipe
 ];
 
@@ -29,7 +33,7 @@ const declarations = [
     ...modules
   ],
   declarations: [
-    ...declarations,
+    ...declarations
   ],
   exports: [
     ...declarations,

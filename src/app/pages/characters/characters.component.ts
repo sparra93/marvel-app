@@ -13,6 +13,7 @@ export class CharactersComponent implements OnInit, OnDestroy {
   resultsInfo: any = {};
   page: number = 1;
   loading: boolean;
+  hassError: boolean;
   private subscription: Subscription = null;
 
   constructor(private characterService: CharacterService) { }
@@ -39,7 +40,10 @@ export class CharactersComponent implements OnInit, OnDestroy {
         this.resultsInfo = response.results;
         this.page = response.results.offset / response.results.limit + 1;
         this.loading = false;
-      }, erro => { this.loading = false;});
+      }, error => {
+        this.loading = false;
+        this.hassError = true;
+      });
   }
 
   onPageChange($event: any): void {

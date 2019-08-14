@@ -9,10 +9,13 @@ import { EmptyDataPipe } from './pipes/empty-data.pipe';
 import { HeaderComponent } from './components/header/header.component';
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { LoadingComponent } from './components/loading/loading.component';
+import { AlertMessageComponent } from './components/alert-message/alert-message.component';
+import { RouterModule } from '@angular/router';
 
 const modules = [
   HttpClientModule,
-  NgbModule
+  NgbModule,
+  RouterModule
 ];
 
 const providers = [
@@ -24,6 +27,7 @@ const declarations = [
   HeaderComponent,
   PaginatorComponent,
   LoadingComponent,
+  AlertMessageComponent,
   EmptyDataPipe
 ];
 

@@ -1,0 +1,12 @@
+<ngb-alert
+    [type]="type"
+    [dismissible]="false">
+    <div *ngIf="!message">
+        <ng-content [ngIf]="!message"></ng-content>
+    </div>
+    <div *ngIf="message">
+        {{
+            message
+        }}
+    </div>
+</ngb-alert>

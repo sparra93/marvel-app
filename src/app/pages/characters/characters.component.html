@@ -5,7 +5,7 @@
 </div>
 <div class="row mt-3">
     <div class="col-md-12">
-        <app-paginator class="d-flex justify-content-end" [collectionSize]="resultsInfo.total" [page]="page"
+        <app-paginator *ngIf="!hassError" class="d-flex justify-content-end" [collectionSize]="resultsInfo.total" [page]="page"
             [rotate]="true" [maxSize]="5" [boundaryLinks]="true" [disabled]="loading"
             (pageChange)="onPageChange($event)">
         </app-paginator>
@@ -41,12 +41,20 @@
 </div>
 <div class="row mt-3">
     <div class="col-md-12">
-        <app-paginator class="d-flex justify-content-end" [collectionSize]="resultsInfo.total" [(page)]="page"
+        <app-paginator *ngIf="!hassError" class="d-flex justify-content-end" [collectionSize]="resultsInfo.total" [(page)]="page"
             [rotate]="true" [maxSize]="5" [boundaryLinks]="true" [disabled]="loading"
             (pageChange)="onPageChange($event)">
         </app-paginator>
     </div>
 </div>
 <ng-template #loadingTpl>
-    <app-loading class="d-flex justify-content-center"></app-loading>
+    <app-loading *ngIf="loading" class="d-flex justify-content-center"></app-loading>
+    <div class="row">
+        <div class="col-4">
+            <app-alert-message *ngIf="hassError" [type]="'danger'">
+                <i class="fas fa-exclamation-circle"></i>
+                Service error <a (click)="getCharacters()" href="javascript:void(0)" class="alert-link">Try again</a>.
+            </app-alert-message>
+        </div>
+    </div>
 </ng-template>

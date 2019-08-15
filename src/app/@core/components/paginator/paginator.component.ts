@@ -10,6 +10,7 @@ export class PaginatorComponent implements OnInit {
   @Input() collectionSize: number = null;
   @Input() rotate: number = null;
   @Input() maxSize: number = null;
+  @Input() pageSize: number = null;
   @Input() boundaryLinks: boolean = null;
   @Input() page: boolean = null;
   @Input() disabled: boolean = false;

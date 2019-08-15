@@ -11,7 +11,7 @@ export class CharactersComponent implements OnInit, OnDestroy {
 
   characters: any[] = [];
   resultsInfo: any = {};
-  page: number = 1;
+  page: number = null;
   loading: boolean;
   hassError: boolean;
   private subscription: Subscription = null;
@@ -48,7 +48,7 @@ export class CharactersComponent implements OnInit, OnDestroy {
 
   onPageChange($event: any): void {
     const query = {
-      offset: $event * this.resultsInfo.limit - this.resultsInfo.limit,
+      offset: ($event - 1) * this.resultsInfo.limit,
       limit: this.resultsInfo.limit
     }
     this.getCharacters(false, query);

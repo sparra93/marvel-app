@@ -1,20 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpParams } from '@angular/common/http';
 import { HttpService } from '../../@core/services/http.service'
-import { share } from 'rxjs/operators';
 import { Observable } from 'rxjs/internal/Observable';
 import { of } from 'rxjs/internal/observable/of';
+import { share } from 'rxjs/internal/operators/share';
 
-@Injectable()
-export class CharacterService {
+@Injectable({
+  providedIn: 'root'
+})
+export class ComicService {
 
-  characters: any = null;
+  comics: any = null;
 
   constructor(private httpService: HttpService) { }
 
   getAll(persistent: boolean = true, params: any): Observable<any> {
-    if (persistent && this.characters && this.characters.data.length > 0) {
-      return of(this.characters);
+    if (persistent && this.comics && this.comics.data.length > 0) {
+      return of(this.comics);
     }
 
     if (params) {
@@ -28,12 +30,11 @@ export class CharacterService {
       params = httpParams;
     }
 
-    const response = this.httpService.get(`/characters`, params).pipe(share());
+    const response = this.httpService.get(`/comics`, params).pipe(share());
     response.subscribe(rs => {
-      this.characters = rs;
+      this.comics = rs;
     });
 
     return response;
   }
-
 }

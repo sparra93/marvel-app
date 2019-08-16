@@ -1,1 +1,82 @@
-<p>comics works!</p>
+<div class="row border-bottom">
+    <h1 class="mt-5">
+        Comics
+    </h1>
+</div>
+
+<div class="row" *ngIf="comics.length > 0; else loadingTpl">
+    <div class="col-md-12 pt-2">
+        <ng-container *ngTemplateOutlet="paginatorTpl"></ng-container>
+    </div>
+    <div class="col-md-3 pt-5" *ngFor="let comic of comics">
+        <app-card [disabled]="loading">
+            <div pre-body-img>
+                <img class="card-img-top rounded-0" src="{{comic.thumbnail.path}}.{{comic.thumbnail.extension}}"
+                    alt="Image {{ comic.name }}" width="auto" height="260">
+            </div>
+            <div footer>
+                <div class="row">
+                    <div class="col-4">
+                        <small>
+                            <span class="badge badge-pill badge-success">
+                                Price
+                                {{
+                                    comic.prices[0].price | currency
+                                }}
+                            </span>
+                        </small>
+                    </div>
+                    <div class="col-3">
+                        <small>
+                            <span class="badge badge-pill badge-info">
+                                {{
+                                    (comic.pageCount > 0 )
+                                    ? comic.pageCount + ' pages'
+                                    : 'Pages not specified'
+                                }}
+                            </span>
+                        </small>
+                    </div>
+                    <div class="col-12 text-truncate">
+                        <small class="font-weight-bold">
+                            {{
+                                comic.title
+                            }}
+                        </small>
+                    </div>
+                </div>
+                <!-- <a *ngIf="character.comics.available > 0" class="float-right p-1 my-1" [routerLink]="['/comics']"
+                    routerLinkActive="router-link-active">
+                    <i class="fas fa-book-reader" title="{{character.comics.available}} commics available">
+                    </i>
+                </a>
+                <a *ngIf="character.series.available > 0" class="float-right p-1 my-1">
+                    <i class="fas fa-tv" title="{{character.series.available}} series available">
+                    </i>
+                </a> -->
+            </div>
+        </app-card>
+    </div>
+    <div class="col-md-12 pt-5">
+        <ng-container *ngTemplateOutlet="paginatorTpl"></ng-container>
+    </div>
+</div>
+
+<ng-template #loadingTpl>
+    <app-loading *ngIf="loading" class="d-flex justify-content-center"></app-loading>
+    <div class="row">
+        <div class="col-4">
+            <app-alert-message *ngIf="hassError" [type]="'danger'">
+                <i class="fas fa-exclamation-circle"></i>
+                Service error <a (click)="getComics()" href="javascript:void(0)" class="alert-link">Try again</a>.
+            </app-alert-message>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #paginatorTpl>
+    <app-paginator *ngIf="!hassError" class="d-flex justify-content-end" [collectionSize]="resultsInfo.total"
+        [(page)]="page" [rotate]="true" [maxSize]="5" [boundaryLinks]="true" [disabled]="loading" [pageSize]="20"
+        (pageChange)="onPageChange($event)">
+    </app-paginator>
+</ng-template>

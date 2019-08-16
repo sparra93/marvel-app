@@ -6,6 +6,7 @@ import { CharactersComponent } from './characters/characters.component';
 import { CharacterService } from '../shared/services/character.service';
 import { CoreModule } from '../@core/core.module';
 import { ComicsComponent } from './comics/comics.component';
+import { ComicService } from '../shared/services/comic.service';
 
 @NgModule({
   imports: [
@@ -13,7 +14,7 @@ import { ComicsComponent } from './comics/comics.component';
     PagesRoutingModule,
     CoreModule
   ],
-  providers: [CharacterService],
+  providers: [CharacterService, ComicService],
   declarations: [CharactersComponent, ComicsComponent]
 })
 export class PagesModule { }

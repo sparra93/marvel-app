@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CharacterService } from '../../shared/services/character.service';
-import { Subscription } from 'rxjs';
+import { Subscription } from 'rxjs/internal/Subscription';
 
 @Component({
   selector: 'app-characters',
@@ -40,7 +40,7 @@ export class CharactersComponent implements OnInit, OnDestroy {
         this.resultsInfo = response.results;
         this.page = response.results.offset / response.results.limit + 1;
         this.loading = false;
-      }, error => {
+      }, () => {
         this.loading = false;
         this.hassError = true;
       });

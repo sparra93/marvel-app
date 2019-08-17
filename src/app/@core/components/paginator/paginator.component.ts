@@ -14,6 +14,7 @@ export class PaginatorComponent implements OnInit {
   @Input() boundaryLinks: boolean = null;
   @Input() page: boolean = null;
   @Input() disabled: boolean = false;
+  @Input() size: string = '';
   @Output() pageChange = new EventEmitter<number>();
 
   constructor() { }

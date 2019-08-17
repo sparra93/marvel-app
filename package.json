@@ -5,11 +5,15 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve -o",
-    "prod": "ng serve -o -e prod",
     "build": "ng build --prod",
+    "postinstall": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
+  },
+  "engines": {
+    "node": "10.16.2",
+    "npm": "6.9.0"
   },
   "private": true,
   "dependencies": {

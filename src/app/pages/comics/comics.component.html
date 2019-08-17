@@ -1,11 +1,11 @@
-<div class="row border-bottom">
+<div class="row border-bottom mb-5">
     <h1 class="mt-5">
         Comics
     </h1>
 </div>
 
 <div class="row" *ngIf="comics.length > 0; else loadingTpl">
-    <div class="col-md-12 pt-2">
+    <div class="col-md-12">
         <ng-container *ngTemplateOutlet="paginatorTpl"></ng-container>
     </div>
     <div class="col-md-3 pt-5" *ngFor="let comic of comics">

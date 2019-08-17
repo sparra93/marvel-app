@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve -o",
+    "start": "node server.js",
     "build": "ng build --prod",
     "postinstall": "ng build --prod",
     "test": "ng test",
@@ -27,6 +27,8 @@
     "@angular/router": "^8.2.0",
     "@ng-bootstrap/ng-bootstrap": "^5.1.0",
     "core-js": "^2.4.1",
+    "express": "^4.17.1",
+    "path": "^0.12.7",
     "rxjs": "^6.5.2",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
@@ -41,6 +43,7 @@
     "@types/jasminewd2": "~2.0.2",
     "@types/node": "~6.0.60",
     "codelyzer": "^5.0.1",
+    "enhanced-resolve": "^3.3.0",
     "jasmine-core": "~2.8.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~2.0.0",

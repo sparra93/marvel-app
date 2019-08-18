@@ -11,8 +11,8 @@ import { ComicService } from '../shared/services/comic.service';
 @NgModule({
   imports: [
     CommonModule,
-    PagesRoutingModule,
-    CoreModule
+    CoreModule,
+    PagesRoutingModule
   ],
   providers: [CharacterService, ComicService],
   declarations: [CharactersComponent, ComicsComponent]

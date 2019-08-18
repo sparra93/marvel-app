@@ -17,18 +17,10 @@ export class CharacterService {
       return of(this.characters);
     }
 
-    if (params) {
-      let httpParams = new HttpParams();
-      for (const param in params) {
-        if (params.hasOwnProperty(param)) {
-          const value = params[param];
-          httpParams = httpParams.append(param, value);
-        }
-      }
-      params = httpParams;
-    }
+    const _params: HttpParams = this.httpService.trasnformParameter(params);
 
-    const response = this.httpService.get(`/characters`, params).pipe(share());
+    const response = this.httpService.get(`/characters`, _params).pipe(share());
+
     response.subscribe(rs => {
       this.characters = rs;
     });

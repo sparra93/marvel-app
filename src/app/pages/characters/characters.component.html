@@ -23,8 +23,7 @@
                         </small>
                     </div>
                 </div>
-                <a *ngIf="character.comics.available > 0" class="float-right p-1 my-1" [routerLink]="['/comics']"
-                    routerLinkActive="router-link-active">
+                <a *ngIf="character.comics.available > 0" class="float-right p-1 my-1" [routerLink]="['/comics', character.id]">
                     <i class="fas fa-book-reader" title="{{character.comics.available}} commics available">
                     </i>
                 </a>
@@ -55,6 +54,6 @@
 <ng-template #paginatorTpl>
     <app-paginator *ngIf="!hassError" class="d-flex justify-content-end" [collectionSize]="resultsInfo.total"
         [(page)]="page" [rotate]="true" [maxSize]="5" [boundaryLinks]="true" [disabled]="loading" [pageSize]="20"
-        (pageChange)="onPageChange($event)">
+        (pageChange)="onPageChange($event)" [size]="'sm'">
     </app-paginator>
 </ng-template>

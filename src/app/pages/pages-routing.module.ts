@@ -10,7 +10,16 @@ const routes: Routes = [
   },
   {
     path: 'comics',
-    component: ComicsComponent
+    children: [
+      {
+        path: '',
+        component: ComicsComponent
+      },
+      {
+        path: ':id',
+        component: ComicsComponent
+      }
+    ]
   },
   {
     path: '**',

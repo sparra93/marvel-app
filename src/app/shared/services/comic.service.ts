@@ -19,18 +19,26 @@ export class ComicService {
       return of(this.comics);
     }
 
-    if (params) {
-      let httpParams = new HttpParams();
-      for (const param in params) {
-        if (params.hasOwnProperty(param)) {
-          const value = params[param];
-          httpParams = httpParams.append(param, value);
-        }
-      }
-      params = httpParams;
-    }
+    const _params: HttpParams = this.httpService.trasnformParameter(params);
 
-    const response = this.httpService.get(`/comics`, params).pipe(share());
+    const response = this.httpService.get(`/comics`, _params).pipe(share());
+
+    response.subscribe(rs => {
+      this.comics = rs;
+    });
+
+    return response;
+  }
+
+  getCharacterComics(persistent: boolean = true, params: any, id: number,): Observable<any> {
+    // if (persistent && this.comics && this.comics.data.length > 0) {
+    //   return of(this.comics);
+    // }
+
+    const _params: HttpParams = this.httpService.trasnformParameter(params);
+
+    const response = this.httpService.get(`/comics/${id}`, _params).pipe(share());
+
     response.subscribe(rs => {
       this.comics = rs;
     });

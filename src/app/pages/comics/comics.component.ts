@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ComicService } from '../../shared/services/comic.service';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-comics',
@@ -14,12 +15,16 @@ export class ComicsComponent implements OnInit {
   page: number = null;
   loading: boolean;
   hassError: boolean;
+  id: number = null;
   private subscription: Subscription = null;
 
-  constructor(private comicService: ComicService) { }
+  constructor(
+    private comicService: ComicService,
+    private activateRoute: ActivatedRoute
+  ) { }
 
   ngOnInit() {
-    this.getComics();
+    this.getParameter();
   }
 
   ngOnDestroy(): void {
@@ -37,7 +42,24 @@ export class ComicsComponent implements OnInit {
     this.subscription = this.comicService.getAll(persistent, params)
       .subscribe(response => {
         this.comics = response.data;
-        console.log(this.comics);
+        this.resultsInfo = response.results;
+        this.page = response.results.offset / response.results.limit + 1;
+        this.loading = false;
+      }, () => {
+        this.loading = false;
+        this.hassError = true;
+      });
+  }
+
+  getCharacterComics(persistent: boolean = true, params: any = null, id: number): void {
+    this.loading = true;
+    if (this.subscription) {
+      this.subscription.unsubscribe;
+    }
+
+    this.subscription = this.comicService.getCharacterComics(persistent, params, id)
+      .subscribe(response => {
+        this.comics = response.data;
         this.resultsInfo = response.results;
         this.page = response.results.offset / response.results.limit + 1;
         this.loading = false;
@@ -52,7 +74,24 @@ export class ComicsComponent implements OnInit {
       offset: ($event - 1) * this.resultsInfo.limit,
       limit: this.resultsInfo.limit
     }
-    this.getComics(false, query);
+
+    if (this.id) {
+      this.getCharacterComics(false, query, this.id);
+    } else {
+      this.getComics(false, query);
+    }
+
+  }
+
+  private getParameter(): void {
+    this.activateRoute.paramMap.subscribe((params: ParamMap) => {
+      this.id = +params.get('id');
+      if (this.id) {
+        this.getCharacterComics(false, null, this.id);
+      } else {
+        this.getComics();
+      }
+    });
   }
 
 }

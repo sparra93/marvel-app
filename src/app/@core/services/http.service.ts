@@ -26,4 +26,18 @@ export class HttpService {
   delete(path): Observable<any> {
     return this.http.delete(`${environment.api_url}${path}`);
   }
+
+  trasnformParameter(params: any): HttpParams{
+    let httpParams = new HttpParams();
+    if (params) {
+      for (const param in params) {
+        if (params.hasOwnProperty(param)) {
+          const value = params[param];
+          httpParams = httpParams.append(param, value);
+        }
+      }
+    }
+    return httpParams;
+  }
+
 }
